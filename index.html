@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Creative Pages Coloring</title>
+  <meta property="og:title" content="Creative Pages Coloring" />
+  <meta property="og:description" content="Seoul Between Scenes — a K-drama inspired coloring book. 36 original scenes." />
+  <meta property="og:image" content="/og.jpg" />
+  <meta property="x:game:image" content="/x-banner.jpg" />
+  <script>
+    (function () {
+      var host = location.host;
+      if (!host) return;
+      var ogImage = "https://" + host + "/og.jpg";
+      var xBanner = "https://" + host + "/x-banner.jpg";
+      var og = document.querySelector('meta[property="og:image"]');
+      if (og) og.content = ogImage;
+      var xCard = { property: "x:game:image", content: xBanner };
+      var xMeta = document.querySelector('meta[property="x:game:image"]');
+      if (xMeta) xMeta.setAttribute(xCard.property, xCard.content);
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --purple: #6d28d9;
+      --purple-deep: #5b21b6;
+      --pink: #ec4899;
+      --ink: #3b2463;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Nunito", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 18%, #fff 0 2px, transparent 3px),
+        radial-gradient(circle at 80% 30%, #fff 0 2px, transparent 3px),
+        radial-gradient(#eadcff 1px, transparent 1.4px),
+        linear-gradient(180deg, #f7f1ff 0%, #f3e8ff 50%, #fde7f3 100%);
+      background-size: 100% 100%, 100% 100%, 22px 22px, auto;
+    }
+    .page { width: min(980px, calc(100% - 28px)); margin: 28px auto 48px; }
+    .sparkle { position: fixed; color: #f9a8d4; font-size: 18px; pointer-events: none; }
+    .header, .product, .note {
+      background: #fff;
+      border-radius: 28px;
+      box-shadow: 0 10px 30px rgba(109, 40, 217, .08);
+    }
+    .header {
+      display: grid;
+      grid-template-columns: 108px 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 18px 22px;
+    }
+    .logo { width: 118px; height: 118px; border-radius: 50%; object-fit: contain; background: #fff; }
+    .brand-name {
+      margin: 0;
+      font-family: "Fredoka", sans-serif;
+      font-size: 40px;
+      line-height: .95;
+      color: var(--purple);
+    }
+    .brand-sub {
+      margin: 2px 0 8px;
+      font-family: "Fredoka", sans-serif;
+      font-size: 28px;
+      color: #7c3aed;
+    }
+    .bubble {
+      display: inline-block;
+      max-width: 460px;
+      border: 1.5px dashed #c4b5fd;
+      background: #faf7ff;
+      color: #4c1d95;
+      border-radius: 16px;
+      padding: 10px 14px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+    .hi { color: #db2777; }
+    .hi2 { color: #7c3aed; }
+    .side { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+    .langs { display: flex; background: #f3e8ff; border-radius: 999px; padding: 4px; gap: 4px; }
+    .lang {
+      border: 0; cursor: pointer; border-radius: 999px;
+      padding: 6px 12px; font-weight: 800; background: transparent; color: #6b21a8;
+    }
+    .lang.active { background: var(--purple); color: #fff; }
+    .tiktok {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #111; color: #fff; text-decoration: none;
+      border-radius: 999px; padding: 8px 14px; font-weight: 800; font-size: 14px;
+    }
+    .note {
+      margin-top: 14px;
+      background: #fff8e8;
+      border-radius: 999px;
+      text-align: center;
+      padding: 10px 16px;
+      font-weight: 800;
+      color: #7c5a12;
+      font-size: 14px;
+    }
+    .product {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 28px;
+      padding: 22px;
+      align-items: center;
+    }
+    .cover {
+      width: 100%;
+      border-radius: 16px;
+      display: block;
+      box-shadow: 0 12px 24px rgba(49, 16, 90, .18);
+    }
+    .badge {
+      display: inline-block;
+      background: #fce7f3;
+      color: #be185d;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .meta { color: #8b7aa3; font-weight: 700; font-size: 14px; margin-left: 8px; }
+    h2 {
+      margin: 10px 0 4px;
+      font-family: "Fredoka", sans-serif;
+      font-size: 36px;
+      color: var(--purple);
+    }
+    .sub { margin: 0 0 10px; color: #7c3aed; font-weight: 800; }
+    .desc { margin: 0; line-height: 1.45; font-weight: 700; color: #4c3b66; }
+    .more {
+      display: inline-block; margin-top: 8px; color: #db2777;
+      font-weight: 800; background: none; border: 0; cursor: pointer; padding: 0;
+      text-decoration: underline; text-underline-offset: 3px;
+    }
+    .extra { display: none; margin-top: 8px; }
+    .extra.open { display: block; }
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+    .pill {
+      border-radius: 999px; padding: 6px 12px; font-size: 13px; font-weight: 800;
+      background: #f5f3ff; color: #6d28d9; border: 1px solid #ddd6fe;
+    }
+    .pill.teal { background: #ecfeff; color: #0f766e; border-color: #a5f3fc; }
+    .pill.pink { background: #fdf2f8; color: #be185d; border-color: #fbcfe8; }
+    .pill.gold { background: #fffbeb; color: #a16207; border-color: #fde68a; }
+    .buy {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(180deg, #f472b6, #ec4899);
+      color: #fff; text-decoration: none; font-weight: 800;
+      border-radius: 999px; padding: 12px 22px; font-size: 18px;
+      box-shadow: 0 8px 0 #be185d;
+    }
+    .samples { display: flex; gap: 8px; margin-top: 10px; }
+    .samples img { width: 86px; height: 112px; object-fit: cover; border-radius: 8px; border: 1px solid #e9d5ff; }
+    @media (max-width: 760px) {
+      .header, .product { grid-template-columns: 1fr; }
+      .side { align-items: flex-start; }
+      .brand-name { font-size: 32px; }
+      h2 { font-size: 30px; }
+      .note { border-radius: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sparkle" style="top:70px;left:24px">✦</div>
+  <div class="sparkle" style="top:180px;right:36px">♥</div>
+  <div class="sparkle" style="bottom:80px;right:48px">✦</div>
+  <main class="page">
+    <header class="header">
+      <img class="logo" src="assets/logo.png" alt="Creative Pages Coloring" />
+      <div>
+        <h1 class="brand-name">Creative Pages</h1>
+        <div class="brand-sub">✦ Coloring ♥</div>
+        <div class="bubble" id="tagline"></div>
+      </div>
+      <div class="side">
+        <div class="langs">
+          <button class="lang active" id="btn-pt" type="button">🇵🇹 PT</button>
+          <button class="lang" id="btn-en" type="button">🇬🇧 EN</button>
+        </div>
+        <a class="tiktok" href="https://www.tiktok.com/@creative.pages.co" target="_blank" rel="noopener">♪ @creative.pages.co</a>
+      </div>
+    </header>
+
+    <div class="note" id="note"></div>
+
+    <section class="product">
+      <img class="cover" src="assets/seoul-product-cover.jpg" alt="Seoul Between Scenes, Book Two" />
+      <div>
+        <div>
+          <span class="badge" id="badge"></span>
+          <span class="meta" id="meta"></span>
+        </div>
+        <h2>Seoul Between Scenes</h2>
+        <p class="sub" id="sub"></p>
+        <p class="desc" id="desc"></p>
+        <button class="more" id="more" type="button"></button>
+        <div class="extra" id="extra">
+          <p class="desc" id="desc-more"></p>
+          <div class="samples">
+            <img src="assets/seoul-cover.jpg" alt="Amostra da capa interior" />
+            <img src="assets/seoul-title.jpg" alt="Amostra da página de título" />
+            <img src="assets/seoul-scene.jpg" alt="Amostra da cena da roda-gigante" />
+          </div>
+        </div>
+        <div class="pills" id="pills"></div>
+        <a class="buy" href="https://amzn.eu/d/078evWEV" target="_blank" rel="noopener">👜 <span id="buy"></span></a>
+      </div>
+    </section>
+  </main>
+  <script>
+    const copy = {
+      pt: {
+        tag: 'Livros para colorir <span class="hi">criativos</span> e cheios de <span class="hi2">charme</span>, para <span class="hi">relaxar</span> e soltar a <span class="hi2">imaginação</span>.',
+        note: "🌐 O botão abre a Amazon — se estiveres noutro país, a Amazon pode sugerir-te a tua loja local.",
+        badge: "✦ Love in Seoul · Livro 2",
+        meta: "Livro em inglês · 82 páginas · capa mole",
+        sub: "✦ livro para colorir inspirado em K-dramas ✦",
+        desc: "Algumas histórias acabam no ecrã. Outras ficam contigo entre cenas. Entra no ambiente romântico de Seul com o segundo volume desta coleção de livros para colorir inspirada em K-dramas: 36 ilustrações originais com momentos que qualquer fã reconhece — voltas na roda-…",
+        more: "Ler mais",
+        less: "Ler menos",
+        descMore: "Voltas na roda-gigante que não anda, o jantar do contrato, o beijo na testa, a chuva na rua e o amanhecer na ponte. Traço original, não copiado de nenhuma série. Para colorir como te lembras: azul-noite no autocarro, dourado no contrato rasgado, blush no gancho do cabelo.",
+        pills: [
+          ["36 ilustrações originais", ""],
+          ["Formato grande 21,6 × 27,9 cm", "teal"],
+          ["Traço limpo e muito espaço para colorir", "pink"],
+          ["Para adolescentes, adultos e fãs de dramas", "gold"]
+        ],
+        buy: "Comprar na Amazon"
+      },
+      en: {
+        tag: 'Coloring books that are <span class="hi">creative</span> and full of <span class="hi2">charm</span>, made to <span class="hi">unwind</span> and set your <span class="hi2">imagination</span> loose.',
+        note: "🌐 The button opens Amazon — in another country, Amazon may suggest your local store.",
+        badge: "✦ Love in Seoul · Book 2",
+        meta: "Book in English · 82 pages · paperback",
+        sub: "✦ a coloring book inspired by K-dramas ✦",
+        desc: "Some stories end on the screen. Others stay with you between scenes. Step into romantic Seoul with the second volume of this K-drama inspired coloring collection: 36 original illustrations of moments any fan already knows — Ferris wheel rides…",
+        more: "Read more",
+        less: "Read less",
+        descMore: "The Ferris wheel that will not move, the contract dinner, the forehead kiss, rain on the street and dawn on the bridge. Original line art, not copied from any series. Color them the way you remember them.",
+        pills: [
+          ["36 original illustrations", ""],
+          ["Large format 8.5 × 11 in", "teal"],
+          ["Clean lines and plenty of room to color", "pink"],
+          ["For teens, adults and drama fans", "gold"]
+        ],
+        buy: "Buy on Amazon"
+      }
+    };
+    let lang = "pt";
+    const extra = document.getElementById("extra");
+    const more = document.getElementById("more");
+    function render() {
+      const t = copy[lang];
+      document.getElementById("tagline").innerHTML = t.tag;
+      document.getElementById("note").textContent = t.note;
+      document.getElementById("badge").textContent = t.badge;
+      document.getElementById("meta").textContent = t.meta;
+      document.getElementById("sub").textContent = t.sub;
+      document.getElementById("desc").textContent = t.desc;
+      document.getElementById("desc-more").textContent = t.descMore;
+      document.getElementById("buy").textContent = t.buy;
+      more.textContent = extra.classList.contains("open") ? t.less : t.more;
+      document.getElementById("pills").innerHTML = t.pills.map(([label, kind]) =>
+        `<span class="pill ${kind}">${label}</span>`).join("");
+      document.documentElement.lang = lang;
+    }
+    more.onclick = () => {
+      extra.classList.toggle("open");
+      more.textContent = extra.classList.contains("open") ? copy[lang].less : copy[lang].more;
+    };
+    function setLang(next) {
+      lang = next;
+      document.getElementById("btn-pt").classList.toggle("active", lang === "pt");
+      document.getElementById("btn-en").classList.toggle("active", lang === "en");
+      render();
+    }
+    document.getElementById("btn-pt").onclick = () => setLang("pt");
+    document.getElementById("btn-en").onclick = () => setLang("en");
+    render();
+  </script>
+</body>
+</html>

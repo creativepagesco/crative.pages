@@ -115,12 +115,57 @@
       padding: 22px;
       align-items: center;
     }
+    .cover-wrap { position: relative; width: 100%; }
+    .cover-stage {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 12px 24px rgba(49, 16, 90, .18);
+      background: #faf7ff;
+      aspect-ratio: 3 / 4;
+    }
     .cover {
       width: 100%;
-      border-radius: 16px;
+      height: 100%;
+      object-fit: cover;
       display: block;
-      box-shadow: 0 12px 24px rgba(49, 16, 90, .18);
+      background: #fff;
     }
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 38px;
+      height: 38px;
+      border: 0;
+      border-radius: 50%;
+      background: #fff;
+      color: var(--purple);
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(49, 16, 90, .25);
+      z-index: 2;
+    }
+    .arrow.prev { left: 8px; }
+    .arrow.next { right: 8px; }
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .dots button {
+      width: 8px;
+      height: 8px;
+      border: 0;
+      border-radius: 50%;
+      background: #ddd6fe;
+      padding: 0;
+      cursor: pointer;
+    }
+    .dots button.on { background: var(--pink); }
     .badge {
       display: inline-block;
       background: #fce7f3;
@@ -196,7 +241,14 @@
     <div class="note" id="note"></div>
 
     <section class="product">
-      <img class="cover" src="assets/seoul-product-cover.jpg" alt="Seoul Between Scenes, Book Two" />
+      <div class="cover-wrap">
+        <div class="cover-stage">
+          <img class="cover" id="cover" src="assets/seoul-product-cover.jpg" alt="Seoul Between Scenes, Book Two" />
+          <button class="arrow prev" id="prev" type="button" aria-label="Página anterior">‹</button>
+          <button class="arrow next" id="next" type="button" aria-label="Página seguinte">›</button>
+        </div>
+        <div class="dots" id="dots"></div>
+      </div>
       <div>
         <div>
           <span class="badge" id="badge"></span>
@@ -289,6 +341,41 @@
     document.getElementById("btn-pt").onclick = () => setLang("pt");
     document.getElementById("btn-en").onclick = () => setLang("en");
     render();
+
+    const slides = [
+      { src: "assets/seoul-product-cover.jpg", alt: "Capa de Seoul Between Scenes" },
+      { src: "assets/miolo/page-1.jpg", alt: "Página do miolo" },
+      { src: "assets/miolo/page-2.jpg", alt: "Página do miolo" },
+      { src: "assets/miolo/page-3.jpg", alt: "Página do miolo" },
+      { src: "assets/miolo/page-4.jpg", alt: "Página do miolo" },
+      { src: "assets/miolo/page-5.jpg", alt: "Página do miolo" },
+      { src: "assets/miolo/page-6.jpg", alt: "Página do miolo" }
+    ];
+    const cover = document.getElementById("cover");
+    const dots = document.getElementById("dots");
+    let index = 0;
+    slides.forEach((_, i) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("aria-label", "Página " + (i + 1));
+      b.onclick = () => show(i);
+      dots.appendChild(b);
+    });
+    function show(i) {
+      index = (i + slides.length) % slides.length;
+      cover.src = slides[index].src;
+      cover.alt = slides[index].alt;
+      [...dots.children].forEach((d, n) => d.classList.toggle("on", n === index));
+    }
+    document.getElementById("prev").onclick = () => show(index - 1);
+    document.getElementById("next").onclick = () => show(index + 1);
+    let touchX = 0;
+    cover.addEventListener("touchstart", (e) => { touchX = e.changedTouches[0].clientX; }, { passive: true });
+    cover.addEventListener("touchend", (e) => {
+      const dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 40) show(index + (dx < 0 ? 1 : -1));
+    });
+    show(0);
   </script>
 </body>
 </html>

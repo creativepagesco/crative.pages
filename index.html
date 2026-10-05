@@ -270,6 +270,32 @@
         <a class="buy" href="https://amzn.eu/d/078evWEV" target="_blank" rel="noopener">👜 <span id="buy"></span></a>
       </div>
     </section>
+
+    <section class="product">
+      <div class="cover-wrap">
+        <div class="cover-stage">
+          <img class="cover" id="cover-5" src="assets/book5/page-1.jpg" alt="Seoul After the Cut, Book Five" />
+          <button class="arrow prev" id="prev-5" type="button" aria-label="Página anterior">‹</button>
+          <button class="arrow next" id="next-5" type="button" aria-label="Página seguinte">›</button>
+        </div>
+        <div class="dots" id="dots-5"></div>
+      </div>
+      <div>
+        <div>
+          <span class="badge" id="badge-5"></span>
+          <span class="meta" id="meta-5"></span>
+        </div>
+        <h2>Seoul After the Cut</h2>
+        <p class="sub" id="sub-5"></p>
+        <p class="desc" id="desc-5"></p>
+        <button class="more" id="more-5" type="button"></button>
+        <div class="extra" id="extra-5">
+          <p class="desc" id="desc-more-5"></p>
+        </div>
+        <div class="pills" id="pills-5"></div>
+        <a class="buy" href="https://amzn.eu/d/09oG4UHr" target="_blank" rel="noopener">👜 <span id="buy-5"></span></a>
+      </div>
+    </section>
   </main>
   <script>
     const copy = {
@@ -289,7 +315,18 @@
           ["Traço limpo e muito espaço para colorir", "pink"],
           ["Para adolescentes, adultos e fãs de dramas", "gold"]
         ],
-        buy: "Comprar na Amazon"
+        buy: "Ver na Amazon",
+        badge5: "✦ Seoul After the Cut · Livro 5",
+        meta5: "Livro em inglês · 84 páginas · capa mole",
+        sub5: "✦ livro para colorir inspirado em K-dramas ✦",
+        desc5: "A sala de reuniões já está acesa. Os gémeos já trocaram de lugar. Já sabes que cortaram o beijo — e mesmo assim queres colorir essa cena. Seoul After the Cut é o quinto volume: o que ficou fora da edição final.",
+        descMore5: "Press play. Algumas cenas merecem uma segunda tomada: o beijo na chuva, o claquete, a cidade depois do corte. Traço original para colorir, não copiado de nenhuma série.",
+        pills5: [
+          ["Livro 5 da coleção", ""],
+          ["Cenas cortadas do drama", "teal"],
+          ["Traço limpo para colorir", "pink"],
+          ["Para fãs de K-dramas", "gold"]
+        ]
       },
       en: {
         tag: 'Coloring books that are <span class="hi">creative</span> and full of <span class="hi2">charm</span>, made to <span class="hi">unwind</span> and set your <span class="hi2">imagination</span> loose.',
@@ -307,7 +344,18 @@
           ["Clean lines and plenty of room to color", "pink"],
           ["For teens, adults and drama fans", "gold"]
         ],
-        buy: "Buy on Amazon"
+        buy: "See on Amazon",
+        badge5: "✦ Seoul After the Cut · Book 5",
+        meta5: "Book in English · 84 pages · paperback",
+        sub5: "✦ a coloring book inspired by K-dramas ✦",
+        desc5: "The boardroom is already lit. The twins have already switched. You already know they cut the kiss — and you still want to color it. Seoul After the Cut is book five: what was left out of the final edit.",
+        descMore5: "Press play. Some moments deserve a second take: the kiss in the rain, the clapperboard, the city after the cut. Original line art, not copied from any series.",
+        pills5: [
+          ["Book 5 of the collection", ""],
+          ["Scenes cut from the drama", "teal"],
+          ["Clean lines to color", "pink"],
+          ["For K-drama fans", "gold"]
+        ]
       }
     };
     let lang = "pt";
@@ -323,6 +371,15 @@
       document.getElementById("desc").textContent = t.desc;
       document.getElementById("desc-more").textContent = t.descMore;
       document.getElementById("buy").textContent = t.buy;
+      document.getElementById("badge-5").textContent = t.badge5;
+      document.getElementById("meta-5").textContent = t.meta5;
+      document.getElementById("sub-5").textContent = t.sub5;
+      document.getElementById("desc-5").textContent = t.desc5;
+      document.getElementById("desc-more-5").textContent = t.descMore5;
+      document.getElementById("buy-5").textContent = t.buy;
+      document.getElementById("more-5").textContent = document.getElementById("extra-5").classList.contains("open") ? t.less : t.more;
+      document.getElementById("pills-5").innerHTML = t.pills5.map(([label, kind]) =>
+        `<span class="pill ${kind}">${label}</span>`).join("");
       more.textContent = extra.classList.contains("open") ? t.less : t.more;
       document.getElementById("pills").innerHTML = t.pills.map(([label, kind]) =>
         `<span class="pill ${kind}">${label}</span>`).join("");
@@ -331,6 +388,12 @@
     more.onclick = () => {
       extra.classList.toggle("open");
       more.textContent = extra.classList.contains("open") ? copy[lang].less : copy[lang].more;
+    };
+    const extra5 = document.getElementById("extra-5");
+    const more5 = document.getElementById("more-5");
+    more5.onclick = () => {
+      extra5.classList.toggle("open");
+      more5.textContent = extra5.classList.contains("open") ? copy[lang].less : copy[lang].more;
     };
     function setLang(next) {
       lang = next;
@@ -342,7 +405,34 @@
     document.getElementById("btn-en").onclick = () => setLang("en");
     render();
 
-    const slides = [
+    function setupCarousel(imgId, prevId, nextId, dotsId, slides) {
+      const cover = document.getElementById(imgId);
+      const dots = document.getElementById(dotsId);
+      let index = 0;
+      slides.forEach((_, i) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.setAttribute("aria-label", "Página " + (i + 1));
+        b.onclick = () => show(i);
+        dots.appendChild(b);
+      });
+      function show(i) {
+        index = (i + slides.length) % slides.length;
+        cover.src = slides[index].src;
+        cover.alt = slides[index].alt;
+        [...dots.children].forEach((d, n) => d.classList.toggle("on", n === index));
+      }
+      document.getElementById(prevId).onclick = () => show(index - 1);
+      document.getElementById(nextId).onclick = () => show(index + 1);
+      let touchX = 0;
+      cover.addEventListener("touchstart", (e) => { touchX = e.changedTouches[0].clientX; }, { passive: true });
+      cover.addEventListener("touchend", (e) => {
+        const dx = e.changedTouches[0].clientX - touchX;
+        if (Math.abs(dx) > 40) show(index + (dx < 0 ? 1 : -1));
+      });
+      show(0);
+    }
+    setupCarousel("cover", "prev", "next", "dots", [
       { src: "assets/seoul-product-cover.jpg", alt: "Capa de Seoul Between Scenes" },
       { src: "assets/miolo/page-1.jpg", alt: "Página do miolo" },
       { src: "assets/miolo/page-2.jpg", alt: "Página do miolo" },
@@ -350,32 +440,15 @@
       { src: "assets/miolo/page-4.jpg", alt: "Página do miolo" },
       { src: "assets/miolo/page-5.jpg", alt: "Página do miolo" },
       { src: "assets/miolo/page-6.jpg", alt: "Página do miolo" }
-    ];
-    const cover = document.getElementById("cover");
-    const dots = document.getElementById("dots");
-    let index = 0;
-    slides.forEach((_, i) => {
-      const b = document.createElement("button");
-      b.type = "button";
-      b.setAttribute("aria-label", "Página " + (i + 1));
-      b.onclick = () => show(i);
-      dots.appendChild(b);
-    });
-    function show(i) {
-      index = (i + slides.length) % slides.length;
-      cover.src = slides[index].src;
-      cover.alt = slides[index].alt;
-      [...dots.children].forEach((d, n) => d.classList.toggle("on", n === index));
-    }
-    document.getElementById("prev").onclick = () => show(index - 1);
-    document.getElementById("next").onclick = () => show(index + 1);
-    let touchX = 0;
-    cover.addEventListener("touchstart", (e) => { touchX = e.changedTouches[0].clientX; }, { passive: true });
-    cover.addEventListener("touchend", (e) => {
-      const dx = e.changedTouches[0].clientX - touchX;
-      if (Math.abs(dx) > 40) show(index + (dx < 0 ? 1 : -1));
-    });
-    show(0);
+    ]);
+    setupCarousel("cover-5", "prev-5", "next-5", "dots-5", [
+      { src: "assets/book5/page-1.jpg", alt: "Capa de Seoul After the Cut" },
+      { src: "assets/book5/page-2.jpg", alt: "Página do miolo" },
+      { src: "assets/book5/page-3.jpg", alt: "Página do miolo" },
+      { src: "assets/book5/page-4.jpg", alt: "Página do miolo" },
+      { src: "assets/book5/page-5.jpg", alt: "Página do miolo" },
+      { src: "assets/book5/page-6.jpg", alt: "Página do miolo" }
+    ]);
   </script>
 </body>
 </html>

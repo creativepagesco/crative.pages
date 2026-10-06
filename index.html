@@ -92,13 +92,14 @@
       padding: 6px 12px; font-weight: 800; background: transparent; color: #6b21a8;
     }
     .lang.active { background: var(--purple); color: #fff; }
-    .socials { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+    .socials { display: flex; flex-wrap: nowrap; gap: 8px; justify-content: flex-end; }
     .tiktok, .insta {
       display: inline-flex; align-items: center; gap: 6px;
-      color: #fff; text-decoration: none;
+      color: #fff; text-decoration: none; white-space: nowrap;
       border-radius: 999px; padding: 8px 14px; font-weight: 800; font-size: 14px;
     }
-    .tiktok svg, .insta svg { width: 16px; height: 16px; display: block; }
+    .tiktok { background: #111; }
+    .tiktok svg, .insta svg { width: 16px; height: 16px; display: block; flex: none; }
     .insta { background: linear-gradient(135deg, #f9ce34, #ee2a7b 55%, #6228d7); }
     .note {
       margin-top: 14px;
@@ -213,8 +214,8 @@
     .samples img { width: 86px; height: 112px; object-fit: cover; border-radius: 8px; border: 1px solid #e9d5ff; }
     @media (max-width: 760px) {
       .header, .product { grid-template-columns: 1fr; }
-      .side { align-items: flex-start; }
-      .socials { justify-content: flex-start; }
+      .side { align-items: center; }
+      .socials { justify-content: center; }
       .brand-name { font-size: 32px; }
       h2 { font-size: 30px; }
       .note { border-radius: 18px; }

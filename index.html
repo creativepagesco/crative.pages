@@ -92,11 +92,14 @@
       padding: 6px 12px; font-weight: 800; background: transparent; color: #6b21a8;
     }
     .lang.active { background: var(--purple); color: #fff; }
-    .tiktok {
+    .socials { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+    .tiktok, .insta {
       display: inline-flex; align-items: center; gap: 6px;
-      background: #111; color: #fff; text-decoration: none;
+      color: #fff; text-decoration: none;
       border-radius: 999px; padding: 8px 14px; font-weight: 800; font-size: 14px;
     }
+    .tiktok { background: #111; }
+    .insta { background: linear-gradient(135deg, #f9ce34, #ee2a7b 55%, #6228d7); }
     .note {
       margin-top: 14px;
       background: #fff8e8;
@@ -211,6 +214,7 @@
     @media (max-width: 760px) {
       .header, .product { grid-template-columns: 1fr; }
       .side { align-items: flex-start; }
+      .socials { justify-content: flex-start; }
       .brand-name { font-size: 32px; }
       h2 { font-size: 30px; }
       .note { border-radius: 18px; }
@@ -234,7 +238,10 @@
           <button class="lang active" id="btn-pt" type="button">🇵🇹 PT</button>
           <button class="lang" id="btn-en" type="button">🇬🇧 EN</button>
         </div>
-        <a class="tiktok" href="https://www.tiktok.com/@creative.pages.co" target="_blank" rel="noopener">♪ @creative.pages.co</a>
+        <div class="socials">
+          <a class="tiktok" href="https://www.tiktok.com/@creative.pages.co" target="_blank" rel="noopener">♪ @creative.pages.co</a>
+          <a class="insta" href="https://www.instagram.com/creativepagescoloring" target="_blank" rel="noopener">📷 @creativepagescoloring</a>
+        </div>
       </div>
     </header>
 

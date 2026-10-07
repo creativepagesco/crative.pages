@@ -59,7 +59,22 @@
       padding: 22px 18px 18px;
       text-align: center;
     }
-    .brand-lockup { width: min(440px, 100%); height: auto; display: block; }
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 18px 14px;
+      text-align: center;
+    }
+    .brand-lockup { width: min(420px, 100%); height: auto; display: block; margin-bottom: -6px; }
+    .brand-sub {
+      margin: 0 0 2px;
+      font-family: "Baloo 2", sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #a56b52;
+    }
     .brand-row { display: flex; flex-direction: column; align-items: center; gap: 2px; }
     .brand-name {
       margin: 0;
@@ -96,6 +111,7 @@
     }
     .bubble {
       width: min(460px, 100%);
+      margin-top: 2px;
       border: 1.5px dashed #e7cbb8;
       background: #fff8f2;
       color: #6b4228;
@@ -250,7 +266,8 @@
   <div class="sparkle" style="bottom:80px;right:48px">✦</div>
   <main class="page">
     <header class="header">
-      <img class="brand-lockup" src="assets/mimocozy-lockup.jpg" alt="Mimocozy, Cozy Coloring Books" />
+      <img class="brand-lockup" src="assets/mimocozy-wordmark.jpg" alt="Mimocozy" />
+      <div class="brand-sub" id="brand-sub"></div>
       <div class="bubble" id="tagline"></div>
       <div class="side">
         <div class="langs">
@@ -393,6 +410,7 @@
     function render() {
       const t = copy[lang];
       document.getElementById("tagline").innerHTML = t.tag;
+      document.getElementById("brand-sub").textContent = t.brandSub;
       document.getElementById("note").textContent = t.note;
       document.getElementById("badge").textContent = t.badge;
       document.getElementById("meta").textContent = t.meta;

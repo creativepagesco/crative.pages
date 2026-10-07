@@ -49,7 +49,11 @@
     .pill { display:inline-block; background:#f7eee8; border-radius:999px; padding:6px 10px; font-size:13px; font-weight:800; }
     .books { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
     .book { display:grid; grid-template-columns:150px 1fr; gap:12px; padding:12px; align-items:center; }
-    .book img { width:150px; height:180px; object-fit:contain; background:#fff; border-radius:14px; }
+    .carousel { position:relative; }
+    .carousel img { width:150px; height:180px; object-fit:cover; background:#fff; border-radius:14px; display:block; }
+    .carousel button { position:absolute; top:50%; transform:translateY(-50%); width:28px; height:28px; border:0; border-radius:50%; background:rgba(255,250,246,.92); color:#4a3428; cursor:pointer; }
+    .carousel .prev { left:6px; }
+    .carousel .next { right:6px; }
     .split { display:grid; grid-template-columns:1.2fr .8fr; gap:14px; }
     .peeks { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
     .peeks button { border:0; padding:0; background:#fff; border-radius:16px; overflow:hidden; cursor:pointer; }
@@ -69,7 +73,7 @@
       .hero, .cols, .books, .split, .book, .social, .peeks { grid-template-columns:1fr; }
       .hero-art { order:-1; }
       h1 { font-size:42px; }
-      .book img { width:100%; height:220px; }
+      .carousel img, .book img { width:100%; height:220px; }
       .letter { flex-direction:column; align-items:stretch; }
     }
   </style>

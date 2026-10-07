@@ -52,47 +52,52 @@
       box-shadow: 0 10px 30px rgba(138, 90, 59, .1);
     }
     .header {
-      display: grid;
-      grid-template-columns: 108px 1fr auto;
-      gap: 14px;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      padding: 18px 22px;
+      gap: 14px;
+      padding: 22px 18px 18px;
+      text-align: center;
     }
-    .logo { width: 128px; height: 128px; border-radius: 24px; object-fit: contain; background: #fffaf4; }
+    .brand-row { display: flex; align-items: center; gap: 8px; }
+    .logo {
+      width: 118px; height: 96px; object-fit: cover; object-position: center 32%;
+      background: transparent; border-radius: 12px;
+    }
     .brand-name {
       margin: 0;
       font-family: "Fredoka", sans-serif;
       font-size: 42px;
-      line-height: .95;
+      line-height: .9;
       color: #6b4228;
     }
     .brand-sub {
-      margin: 4px 0 8px;
+      margin: 2px 0 0;
       font-family: "Fredoka", sans-serif;
       font-size: 18px;
-      color: #c4846c;
+      color: #a56b52;
     }
     .bubble {
-      display: inline-block;
-      max-width: 520px;
+      width: min(460px, 100%);
       border: 1.5px dashed #e7cbb8;
       background: #fff8f2;
       color: #6b4228;
-      border-radius: 16px;
-      padding: 10px 14px;
+      border-radius: 18px;
+      padding: 14px 16px;
       font-weight: 800;
-      line-height: 1.45;
+      line-height: 1.7;
+      text-align: left;
     }
-    .hi { color: #db2777; }
-    .hi2 { color: #7c3aed; }
-    .side { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
-    .langs { display: flex; background: #f6e7dc; border-radius: 999px; padding: 4px; gap: 4px; }
+    .bubble div { display: flex; gap: 10px; align-items: center; }
+    .side { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .langs { display: flex; align-items: center; background: #f6e7dc; border-radius: 999px; padding: 4px; gap: 4px; }
     .lang {
       border: 0; cursor: pointer; border-radius: 999px;
-      padding: 6px 12px; font-weight: 800; background: transparent; color: #8a5a3b;
+      padding: 6px 14px; font-weight: 800; background: transparent; color: #8a5a3b;
     }
     .lang.active { background: #8a5a3b; color: #fff; }
-    .socials { display: flex; flex-wrap: nowrap; gap: 8px; justify-content: flex-end; }
+    .lang-split { width: 1px; height: 18px; background: #e4d3c6; }
+    .socials { display: flex; flex-wrap: nowrap; gap: 10px; justify-content: center; }
     .tiktok, .insta {
       display: inline-flex; align-items: center; gap: 6px;
       color: #fff; text-decoration: none; white-space: nowrap;
@@ -213,7 +218,7 @@
     .samples { display: flex; gap: 8px; margin-top: 10px; }
     .samples img { width: 86px; height: 112px; object-fit: cover; border-radius: 8px; border: 1px solid #e9d5ff; }
     @media (max-width: 760px) {
-      .header, .product { grid-template-columns: 1fr; }
+      .product { grid-template-columns: 1fr; }
       .side { align-items: center; }
       .socials { justify-content: center; }
       .brand-name { font-size: 32px; }
@@ -228,15 +233,18 @@
   <div class="sparkle" style="bottom:80px;right:48px">✦</div>
   <main class="page">
     <header class="header">
-      <img class="logo" src="assets/mimocozy-logo.jpg" alt="Mimocozy" />
-      <div>
-        <h1 class="brand-name">Mimocozy</h1>
-        <div class="brand-sub">cozy coloring books</div>
-        <div class="bubble" id="tagline"></div>
+      <div class="brand-row">
+        <img class="logo" src="assets/mimocozy-logo.jpg" alt="" />
+        <div>
+          <h1 class="brand-name">Mimocozy</h1>
+          <div class="brand-sub" id="brand-sub"></div>
+        </div>
       </div>
+      <div class="bubble" id="tagline"></div>
       <div class="side">
         <div class="langs">
           <button class="lang active" id="btn-pt" type="button">🇵🇹 PT</button>
+          <span class="lang-split"></span>
           <button class="lang" id="btn-en" type="button">🇬🇧 EN</button>
         </div>
         <div class="socials">
@@ -308,7 +316,8 @@
   <script>
     const copy = {
       pt: {
-        tag: '📚 Cozy coloring books & little moments of joy ✨<br>🎨 Criatividade, conforto e páginas para colorir<br>🤎 Welcome to the world of Mimocozy',
+        tag: '<div>🎨 Livros para colorir aconchegantes</div><div>✨ Páginas fofas, momentos calmos</div><div>🤎 Bem-vinda ao Mimocozy</div>',
+        brandSub: 'Livros para colorir',
         note: "🌐 O botão abre a Amazon — se estiveres noutro país, a Amazon pode sugerir-te a tua loja local.",
         badge: "✦ Love in Seoul · Livro 2",
         meta: "Livro em inglês · 82 páginas · capa mole",
@@ -337,7 +346,8 @@
         ]
       },
       en: {
-        tag: '📚 Cozy coloring books & little moments of joy ✨<br>🎨 Criatividade, conforto e páginas para colorir<br>🤎 Welcome to the world of Mimocozy',
+        tag: '<div>🎨 Cozy coloring books</div><div>✨ Cute pages, calm moments</div><div>🤎 Welcome to Mimocozy</div>',
+        brandSub: 'Cozy Coloring Books',
         note: "🌐 The button opens Amazon — in another country, Amazon may suggest your local store.",
         badge: "✦ Love in Seoul · Book 2",
         meta: "Book in English · 82 pages · paperback",
@@ -372,6 +382,7 @@
     function render() {
       const t = copy[lang];
       document.getElementById("tagline").innerHTML = t.tag;
+      document.getElementById("brand-sub").textContent = t.brandSub;
       document.getElementById("note").textContent = t.note;
       document.getElementById("badge").textContent = t.badge;
       document.getElementById("meta").textContent = t.meta;

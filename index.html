@@ -63,11 +63,19 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
-      padding: 16px 18px 14px;
+      gap: 6px;
+      padding: 14px 12px 12px;
       text-align: center;
+      overflow: visible;
     }
-    .brand-lockup { width: min(420px, 100%); height: auto; display: block; margin-bottom: -6px; }
+    .brand-lockup {
+      width: min(520px, 100%);
+      height: auto;
+      max-height: none;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
+    }
     .brand-sub {
       margin: 0 0 2px;
       font-family: "Baloo 2", sans-serif;

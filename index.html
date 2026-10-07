@@ -59,17 +59,32 @@
       padding: 22px 18px 18px;
       text-align: center;
     }
-    .brand-row { display: flex; align-items: center; gap: 8px; }
-    .logo {
-      width: 118px; height: 96px; object-fit: cover; object-position: center 32%;
-      background: transparent; border-radius: 12px;
-    }
+    .brand-row { display: flex; flex-direction: column; align-items: center; gap: 2px; }
     .brand-name {
       margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
       font-family: "Fredoka", sans-serif;
-      font-size: 42px;
-      line-height: .9;
+      font-size: 46px;
+      line-height: 1;
       color: #6b4228;
+    }
+    .logo-slot {
+      width: 62px;
+      height: 54px;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .logo-slot img {
+      width: 92px;
+      height: auto;
+      margin-top: -6px;
+      object-fit: cover;
+      object-position: center 22%;
     }
     .brand-sub {
       margin: 2px 0 0;
@@ -221,7 +236,7 @@
       .product { grid-template-columns: 1fr; }
       .side { align-items: center; }
       .socials { justify-content: center; }
-      .brand-name { font-size: 32px; }
+      .brand-name { font-size: 36px; }
       h2 { font-size: 30px; }
       .note { border-radius: 18px; }
     }
@@ -234,11 +249,8 @@
   <main class="page">
     <header class="header">
       <div class="brand-row">
-        <img class="logo" src="assets/mimocozy-logo.jpg" alt="" />
-        <div>
-          <h1 class="brand-name">Mimocozy</h1>
-          <div class="brand-sub" id="brand-sub"></div>
-        </div>
+        <h1 class="brand-name">Mim<span class="logo-slot"><img src="assets/mimocozy-logo.jpg" alt=""></span>cozy</h1>
+        <div class="brand-sub" id="brand-sub"></div>
       </div>
       <div class="bubble" id="tagline"></div>
       <div class="side">

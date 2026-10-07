@@ -59,6 +59,7 @@
       padding: 22px 18px 18px;
       text-align: center;
     }
+    .brand-lockup { width: min(440px, 100%); height: auto; display: block; }
     .brand-row { display: flex; flex-direction: column; align-items: center; gap: 2px; }
     .brand-name {
       margin: 0;
@@ -249,13 +250,7 @@
   <div class="sparkle" style="bottom:80px;right:48px">✦</div>
   <main class="page">
     <header class="header">
-      <div class="brand-row">
-        <img class="brand-mark" src="assets/mimocozy-cat.jpg" alt="" />
-        <div>
-          <h1 class="brand-name">Mimocozy</h1>
-          <div class="brand-sub" id="brand-sub"></div>
-        </div>
-      </div>
+      <img class="brand-lockup" src="assets/mimocozy-lockup.jpg" alt="Mimocozy, Cozy Coloring Books" />
       <div class="bubble" id="tagline"></div>
       <div class="side">
         <div class="langs">
@@ -398,7 +393,6 @@
     function render() {
       const t = copy[lang];
       document.getElementById("tagline").innerHTML = t.tag;
-      document.getElementById("brand-sub").textContent = t.brandSub;
       document.getElementById("note").textContent = t.note;
       document.getElementById("badge").textContent = t.badge;
       document.getElementById("meta").textContent = t.meta;
